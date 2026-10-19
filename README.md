@@ -1,6 +1,6 @@
-# TTLX 本地考试练习系统（天天乐学替代系统）
+# 湖北省计算机技能高考（天天乐学替代系统）
 
-> 本地自建的考试 / 练习系统：服务端 + 教师端 + 学生端，全题型全自动机器判分。
+> 湖北省计算机技能高考考试 / 练习系统：服务端 + 教师端 + 学生端，全题型全自动机器判分。
 > 三端均为 Python 应用（服务端 asyncio 单 TCP 端口，客户端 PySide6 GUI），
 > 可打包为单 exe（内嵌 Python 运行时，目标机免装 Python）。
 
@@ -10,7 +10,7 @@
 - **教师端 / 学生端**：Python GUI，`PySide6 + PySide6-Fluent-Widgets`（Win11 扁平化风格、全中文）。
 - **判分**：客观题（单选/多选/判断）服务端即时判分；操作题（Word/Excel/PPT/PS/Access/MySQL/Python/Win10设置/网络/邮箱/浏览器收藏等）全自动机器判分。
 - **内置 MySQL 运行时**：MySQL 题无需本机安装 MySQL，服务端内置免安装 MySQL 5.7 临时实例判分。
-- **不包含**：第三方判分引擎二进制（原版 DLL）、虚拟程序（Edge/Win10 模拟 exe）、题库素材与数据库文件——这些为私有/第三方资产，不在本仓库。
+- **本仓库包含完整服务端**：判分引擎（judge/）、MySQL 运行时（runtime/）、题库（tiku/：客观题 questions.jsonl + 操作题 tiku.db + 解密技术文档）、初始数据库（exam.db）。仅 1.1GB 操作题素材（operate_files/）因超出 GitHub 大小限制未收录，需自行从原项目 `123/operate_files` 复制。
 
 ## 目录结构
 
@@ -31,7 +31,15 @@ github\
 │  ├─ vapp_grader.py      # Win10 设置/网络/邮箱题判分器
 │  ├─ pia_enum.txt        # Office 枚举名=数值表（判分用）
 │  ├─ frpc_config.json    # 内网穿透配置模板（占位）
+│  ├─ judge\              # 判分引擎（原版 DLL + Python 桥接）
+│  ├─ runtime\            # 内置免安装 MySQL 5.7 运行时（MySQL 题判分用）
+│  ├─ frpc\frpc.exe       # 内网穿透客户端（frpc）
+│  ├─ exam.db             # 初始数据库（题库 + 账号，SQLite）
 │  └─ accdb\              # Access DAO 判分 PowerShell 脚本
+├─ tiku\                  # 题库源
+│  ├─ questions.jsonl     # 客观题库（单选/多选/判断）
+│  ├─ tiku.db             # 操作题库
+│  └─ 解密技术文档.md     # 原版数据库解密说明
 └─ pyclient\              # 客户端源码
    ├─ common\             # 学生端/教师端共用
    │  ├─ net_client.py    # TCP 客户端协议
@@ -101,7 +109,7 @@ python -m student.main
 2. **Word/Excel/PPT 判分为 0 或报错**：确认装了 Office 或 WPS；判分前会自动清理残留 Office 进程。
 3. **Access 题无法判分**：安装 32 位 Access Database Engine (ACE) / Access Runtime。
 4. **成绩显示「判分中」**：文件题后台排队判分，数分钟后在成绩页刷新即可，不是错误。
-5. **MySQL 题**：无需本机装 MySQL，内置 runtime/mysql（本仓库不含，需自行准备 MySQL 5.7 运行时）。
+5. **MySQL 题**：无需本机装 MySQL，内置 `runtime/mysql` 免安装 MySQL 5.7 运行时已随仓库提供，服务端自动起停临时实例判分。
 
 ## 协议
 
