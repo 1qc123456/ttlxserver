@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.ttlx.student'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.ttlx.student"
+        // 26：PBKDF2WithHmacSHA256 需要（协议密钥派生）；实际建议 Android 9+
+        minSdk 26
+        // 关键：targetSdk 28 —— 允许从应用私有目录 exec 二进制（proot 依赖此行为；
+        // Android 10+ 对 targetSdk>=29 的应用禁止执行私有目录里的文件）。
+        targetSdk 28
+        versionCode 17
+        versionName "3.3"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            // 学校侧载分发：用 debug 签名即可（无需正式密钥）
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    // rootfs（tar.xz）解压：纯 Java 实现，无需本地 so
+    implementation 'org.apache.commons:commons-compress:1.26.1'
+    implementation 'org.tukaani:xz:1.9'
+
+    // Material 3 界面（借鉴 SukiSU Ultra 的现代风格）+ FileProvider（分享日志）
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core:1.12.0'
+    implementation 'com.google.android.material:material:1.11.0'
+
+    // ---- 容器桌面显示：Termux:X11（原生 X server）----
+    // 在 App 进程内直接渲染 X11 画面，**不需要 VNC、不需要 TCP 端口**，
+    // 比 Xvnc + VNC 客户端少一整层出错可能（参考 tiny_container 的做法）。
+    // ⚠ 许可：Termux:X11 是 GPL-3.0 —— 引入后本项目（学生端 APK）整体以 GPL-3.0 分发。
+    implementation 'com.github.tiny-computer:termux-x11:21159a1405'
+}

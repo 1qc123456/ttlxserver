@@ -1,0 +1,19 @@
+// 阿里云镜像加速（国内网络），未依赖 Google 官方仓库直连
+pluginManagement {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        // Termux:X11（原生 X server）只在 JitPack 上有
+        maven { url 'https://jitpack.io' }
+    }
+}
+rootProject.name = "ttlx-student"
+include ':app'
