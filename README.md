@@ -10,7 +10,7 @@
 - **教师端 / 学生端**：Python GUI，`PySide6 + PySide6-Fluent-Widgets`（Win11 扁平化风格、全中文）。
 - **判分**：客观题（单选/多选/判断）服务端即时判分；操作题（Word/Excel/PPT/PS/Access/MySQL/Python/Win10设置/网络/邮箱/浏览器收藏等）全自动机器判分。
 - **内置 MySQL 运行时**：MySQL 题无需本机安装 MySQL，服务端内置免安装 MySQL 5.7 临时实例判分。
-- **本仓库包含完整服务端**：判分引擎（judge/）、MySQL 运行时（runtime/）、题库（tiku/：客观题 questions.jsonl + 操作题 tiku.db + 解密技术文档）、初始数据库（exam.db）。仅 1.1GB 操作题素材（operate_files/）因超出 GitHub 大小限制未收录，需自行从原项目 `123/operate_files` 复制。
+- **本仓库包含完整服务端**：判分引擎（judge/）、MySQL 运行时（runtime/）、题库（tiku/：客观题 questions.jsonl + 操作题 tiku.db + 解密技术文档）、初始数据库（exam.db）、全部操作题素材（server/operate_files/，3315 个文件 / 约 1.1GB）。
 
 ## 目录结构
 
