@@ -1,0 +1,20 @@
+# 天天乐学替代系统 — Python 依赖（Windows / Python 3.14 验证，3.10+ 大概率可用）
+# 用途：源码运行 或 用 PyInstaller 重新打包时安装。
+#   在本目录执行：  pip install -r requirements.txt
+# 注意：release 单 exe 已内嵌 Python 与下列全部依赖，普通使用无需安装、无需本文件。
+# 间接依赖（numpy / pillow / attrs / scikit-image / darkdetect / shiboken6 等）由 pip 自动解析。
+
+# --- 客户端 GUI（教师端 / 学生端）---
+PySide6==6.11.2
+PySide6-Fluent-Widgets==1.11.3
+
+# --- 服务端判分 ---
+PyMySQL==1.2.3               # MySQL(type24) 判分：连接内置临时 MySQL 实例
+psd-tools==1.23.0            # Photoshop(type18) Python 兜底判分（主判分走引擎 Aspose）
+
+# --- 可选（历史 / 边缘用途；默认运行不强制，缺了也能跑）---
+pywin32==312                 # 早期 Office/ACE COM 方案残留；现 Office 走 JudgeHost 子进程、Access 走 DAO PowerShell
+pycryptodome==3.23.0         # 早期加解密方案残留；现解密走标准库 base64/gzip
+
+# --- 重新打包还需 ---
+# pyinstaller==6.21.0
