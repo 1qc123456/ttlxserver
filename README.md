@@ -122,3 +122,7 @@ TCP 自定义协议：4 字节大端长度前缀 + UTF-8 JSON。接口文档见 
 ## License
 
 见 [LICENSE](LICENSE)。
+
+## Contributing
+
+欢迎提交 Issue 或 Pull Request。如果你想长期参与维护，也欢迎联系我。
