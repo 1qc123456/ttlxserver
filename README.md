@@ -4,6 +4,9 @@
 > 三端均为 Python 应用（服务端 asyncio 单 TCP 端口，客户端 PySide6 GUI），
 > 可打包为单 exe（内嵌 Python 运行时，目标机免装 Python）。
 
+
+##项目bug：mysql判分问题，教师端监控问题（没仔细看，可能还有）
+
 ## 项目简介
 
 - **服务端**：Python `asyncio`，单 TCP 端口（默认 5943），帧格式 = 4 字节大端长度 + UTF-8 JSON；SQLite 数据库。
